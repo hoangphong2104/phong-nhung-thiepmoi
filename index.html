@@ -19,17 +19,17 @@
 
     /* ── Tokens ── */
     :root {
-      --bg-page:      #e5dfd5;
-      --card-bg:      #efe8de;
-      --card-fg:      #3a2a1c;
-      --accent:       #8a3a2a;
-      --seal-light:   #8a3a2a;
-      --seal-dark:    #5a2415;
-      --env-bg:       #e2d8c5;
-      --env-flap-1:   #e8dec9;
-      --env-flap-2:   #d8cdb5;
-      --stamp-bg:     #f3efe7;
-      --seal-text:    #f0e2cf;
+      --bg-page:      #dfe9db;
+      --card-bg:      #88a882;
+      --card-fg:      #f0ece2;
+      --accent:       #f0ece2;
+      --seal-light:   #c4a46a;
+      --seal-dark:    #9a7840;
+      --env-bg:       #85a67f;
+      --env-flap-1:   #98ba90;
+      --env-flap-2:   #6e8e68;
+      --stamp-bg:     #f0ebe0;
+      --seal-text:    #f5f0e8;
     }
 
     /* ── Base ── */
@@ -61,7 +61,7 @@
       position: relative;
       box-shadow:
         0 1px 0 rgba(0,0,0,.04),
-        0 30px 60px -30px rgba(60,40,20,.28);
+        0 30px 60px -30px rgba(28,48,26,.30);
       cursor: pointer;
       user-select: none;
       transition:
@@ -172,14 +172,14 @@
       font-size: clamp(9px, 1.4vw, 16px);
       letter-spacing: .22em;
       text-transform: uppercase;
-      opacity: .65;
+      color: rgba(240,236,226,.65);
     }
 
     .addr-guest {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: clamp(22px, 4.5vw, 44px);
-      color: #2b2620;
+      color: #f0ece2;
       margin-top: clamp(4px, 1.2%, 10px);
       line-height: 1.1;
     }
@@ -188,8 +188,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: clamp(12px, 1.9vw, 22px);
-      color: var(--card-fg);
-      opacity: .8;
+      color: rgba(240,236,226,.75);
       line-height: 1.5;
       margin-top: clamp(4px, 1%, 8px);
     }
@@ -204,11 +203,11 @@
       align-items: flex-end;
     }
 
-    .env-heart {
+    .env-mono {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: clamp(14px, 2.4vw, 24px);
-      color: var(--accent);
+      color: rgba(240,236,226,.80);
     }
 
     /* ── Open animations ── */
@@ -273,28 +272,47 @@
     .card {
       width: min(88vw, 720px);
       aspect-ratio: 5 / 7;
-      background: var(--card-bg);
-      color: var(--card-fg);
       position: relative;
       box-shadow:
         0 1px 0 rgba(0,0,0,.04),
-        0 30px 60px -30px rgba(60,40,20,.25);
-      background-image:
-        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(138,58,42,.05), transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(138,58,42,.04), transparent 70%);
+        0 30px 60px -30px rgba(28,48,26,.28);
       opacity: 0;
       transform: translateY(28px);
       transition: opacity 700ms ease, transform 700ms ease;
     }
 
-    .card:nth-child(2) {
-      transition-delay: 260ms;
-    }
+    .card:nth-child(2) { transition-delay: 260ms; }
 
     .cards-section.visible .card {
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Sage green card (invitation) */
+    .card--green {
+      background: #88a882;
+      color: #f0ece2;
+      --accent: #f0ece2;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(30,55,28,.12), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(30,55,28,.10), transparent 70%);
+    }
+
+    /* Cream card (details) */
+    .card--cream {
+      background: #f0ebe0;
+      color: #2a3d28;
+      --accent: #5a7855;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(88,120,82,.07), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(88,120,82,.05), transparent 70%);
+    }
+
+    .card--green .amp,
+    .card--green .dow,
+    .card--green .invite-copy em { color: #f0ece2; }
+
+    .card--cream .detail-eyebrow { color: #5a7855; }
 
     .card-inner {
       position: absolute;
@@ -568,7 +586,7 @@
 
       <div class="env-footer">
         <div class="addr-label">from · phong &amp; nhung</div>
-        <div class="env-heart">♥ P · N ♥</div>
+        <div class="env-mono">P · N</div>
       </div>
     </div>
 
@@ -579,7 +597,7 @@
   <section class="cards-section" id="cards">
 
     <!-- Thiệp chính -->
-    <div class="card" id="card-invite">
+    <div class="card card--green" id="card-invite">
       <div class="card-inner">
         <div class="ornament">Together with their families</div>
 
@@ -614,7 +632,7 @@
     </div>
 
     <!-- Thiệp lịch trình -->
-    <div class="card" id="card-details">
+    <div class="card card--cream" id="card-details">
       <div class="card-inner">
         <div>
           <div class="ornament">Order of the day</div>
