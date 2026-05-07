@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vows · Hoàng Phong &amp; Hồng Nhung · 30.05.2026</title>
+  <meta name="description" content="Trân trọng kính mời bạn đến dự lễ thề ước của Hoàng Phong &amp; Hồng Nhung — 30 Tháng Năm 2026, Trốn Glamping.">
+  <meta property="og:title" content="Vows · Hoàng Phong &amp; Hồng Nhung">
+  <meta property="og:description" content="30 Tháng Năm 2026 · 16:00 · Trốn Glamping">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Italiana&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Tokens ── */
+    :root {
+      --bg-page:      #e5dfd5;
+      --card-bg:      #efe8de;
+      --card-fg:      #3a2a1c;
+      --accent:       #8a3a2a;
+      --seal-light:   #8a3a2a;
+      --seal-dark:    #5a2415;
+      --env-bg:       #e2d8c5;
+      --env-flap-1:   #e8dec9;
+      --env-flap-2:   #d8cdb5;
+      --stamp-bg:     #f3efe7;
+      --seal-text:    #f0e2cf;
+    }
+
+    /* ── Base ── */
+    html {
+      background: var(--bg-page);
+      color: var(--card-fg);
+      font-family: 'Cormorant Garamond', serif;
+      scroll-behavior: smooth;
+    }
+
+    body { min-height: 100vh; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px;
+      gap: 28px;
+    }
+
+    /* ── Envelope ── */
+    .envelope {
+      width: min(95vw, 900px);
+      aspect-ratio: 3 / 2;
+      background: var(--env-bg);
+      position: relative;
+      box-shadow:
+        0 1px 0 rgba(0,0,0,.04),
+        0 30px 60px -30px rgba(60,40,20,.28);
+      cursor: pointer;
+      user-select: none;
+      transition:
+        transform 300ms ease,
+        box-shadow 300ms ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 1px 0 rgba(0,0,0,.04),
+        0 44px 80px -30px rgba(60,40,20,.34);
+    }
+
+    .envelope.open {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .envelope.open:hover {
+      transform: none;
+      box-shadow:
+        0 1px 0 rgba(0,0,0,.04),
+        0 30px 60px -30px rgba(60,40,20,.28);
+    }
+
+    /* Flap */
+    .env-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 48%;
+      background: linear-gradient(180deg, var(--env-flap-1), var(--env-flap-2));
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+
+    /* Stamp */
+    .stamp {
+      position: absolute;
+      top: 5%; right: 4%;
+      width: clamp(64px, 10%, 100px);
+      aspect-ratio: 108 / 128;
+      background: var(--stamp-bg);
+      border: 2px dashed rgba(0,0,0,.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(5px, 1%, 9px);
+    }
+
+    .stamp-inner {
+      border: 1px solid rgba(0,0,0,.40);
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      gap: 3px;
+    }
+
+    .stamp-vows {
+      font-family: 'Italiana', serif;
+      font-size: clamp(15px, 2.2vw, 26px);
+      line-height: 1;
+    }
+
+    .stamp-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(8px, 1.2vw, 13px);
+    }
+
+    /* Seal */
+    .seal {
+      position: absolute;
+      top: 44%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(68px, 11vw, 118px);
+      height: clamp(68px, 11vw, 118px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, var(--seal-light) 0%, var(--seal-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--seal-text);
+      font-family: 'Italiana', serif;
+      font-size: clamp(20px, 3.4vw, 34px);
+      letter-spacing: .06em;
+      box-shadow:
+        0 8px 28px rgba(0,0,0,.32),
+        inset 0 0 0 4px rgba(255,255,255,.12),
+        inset 0 -6px 12px rgba(0,0,0,.30);
+      z-index: 10;
+    }
+
+    /* Address */
+    .env-addr {
+      position: absolute;
+      left: clamp(28px, 7%, 80px);
+      top: 58%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 1%, 8px);
+    }
+
+    .addr-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(9px, 1.4vw, 16px);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .addr-guest {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(22px, 4.5vw, 44px);
+      color: #2b2620;
+      margin-top: clamp(4px, 1.2%, 10px);
+      line-height: 1.1;
+    }
+
+    .addr-lines {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(12px, 1.9vw, 22px);
+      color: var(--card-fg);
+      opacity: .8;
+      line-height: 1.5;
+      margin-top: clamp(4px, 1%, 8px);
+    }
+
+    .env-footer {
+      position: absolute;
+      bottom: clamp(18px, 4%, 34px);
+      left: clamp(28px, 7%, 80px);
+      right: clamp(28px, 7%, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .env-heart {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2.4vw, 24px);
+      color: var(--accent);
+    }
+
+    /* ── Open animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .env-flap {
+        transition:
+          transform 520ms cubic-bezier(.4,0,.2,1),
+          opacity   300ms ease 220ms;
+      }
+
+      .seal {
+        transition:
+          transform 480ms cubic-bezier(.4,0,.2,1) 80ms,
+          opacity   380ms ease 160ms;
+      }
+
+      .envelope.open .env-flap {
+        transform: translateY(-72%) rotate(-6deg);
+        opacity: 0;
+      }
+
+      .envelope.open .seal {
+        transform: translate(-50%, -190%) rotate(22deg) scale(0.72);
+        opacity: 0;
+      }
+    }
+
+    /* ── Hint ── */
+    .hint {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.6vw, 17px);
+      letter-spacing: .36em;
+      text-transform: uppercase;
+      opacity: .5;
+      text-align: center;
+      transition: opacity 350ms ease;
+      animation: pulse 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: .42; }
+      50%       { opacity: .68; }
+    }
+
+    .hint.away {
+      opacity: 0;
+      animation: none;
+    }
+
+    /* ── Cards section ── */
+    .cards-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 44px;
+      padding: 0 20px 88px;
+    }
+
+    /* ── Card base ── */
+    .card {
+      width: min(88vw, 720px);
+      aspect-ratio: 5 / 7;
+      background: var(--card-bg);
+      color: var(--card-fg);
+      position: relative;
+      box-shadow:
+        0 1px 0 rgba(0,0,0,.04),
+        0 30px 60px -30px rgba(60,40,20,.25);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(138,58,42,.05), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(138,58,42,.04), transparent 70%);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .card:nth-child(2) {
+      transition-delay: 260ms;
+    }
+
+    .cards-section.visible .card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-inner {
+      position: absolute;
+      inset: 0;
+      padding: clamp(44px, 8%, 84px) clamp(24px, 7%, 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ── Shared type ── */
+    .ornament {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(11px, 1.7vw, 19px);
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      opacity: .55;
+      text-align: center;
+    }
+    .ornament::before, .ornament::after {
+      content: '·';
+      margin: 0 12px;
+      opacity: .5;
+    }
+
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(10px, 1.4vw, 16px);
+      letter-spacing: .40em;
+      text-transform: uppercase;
+      opacity: .65;
+      text-align: center;
+    }
+
+    .names {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(44px, 7.8vw, 96px);
+      line-height: 1;
+      text-align: center;
+      letter-spacing: .005em;
+    }
+
+    .amp {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(36px, 6.2vw, 78px);
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin: clamp(6px, 1.4%, 12px) 0;
+    }
+
+    .invite-copy {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(15px, 2.4vw, 22px);
+      line-height: 1.7;
+      text-align: center;
+      max-width: 30ch;
+      margin: 0 auto;
+    }
+
+    .invite-copy em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hairline {
+      width: 64px;
+      height: 1px;
+      background: currentColor;
+      margin: clamp(18px, 3.5%, 32px) auto;
+      opacity: .35;
+    }
+
+    /* Date */
+    .date-block { text-align: center; }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 2.8%, 24px);
+      margin-top: 14px;
+    }
+
+    .date-num {
+      font-family: 'Italiana', serif;
+      font-size: clamp(38px, 6.8vw, 80px);
+      line-height: 1;
+    }
+
+    .date-month {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2.4vw, 30px);
+      letter-spacing: .06em;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      border-left: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+      padding: 8px clamp(3px, .8%, 6px);
+    }
+
+    .dow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(11px, 1.4vw, 14px);
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      margin-top: 18px;
+      color: var(--accent);
+    }
+
+    /* Venue */
+    .venue {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .venue-name {
+      font-family: 'Italiana', serif;
+      font-style: normal;
+      font-size: clamp(18px, 2.9vw, 30px);
+      letter-spacing: .04em;
+      display: block;
+    }
+
+    .venue-sub {
+      font-size: clamp(13px, 1.7vw, 18px);
+      opacity: .7;
+    }
+
+    /* ── Details card ── */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(22px, 3.8vw, 38px);
+      text-align: center;
+      margin-top: 14px;
+      margin-bottom: clamp(20px, 4%, 36px);
+    }
+
+    .schedule {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px 22px;
+    }
+
+    .sched-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(11px, 1.7vw, 16px);
+      letter-spacing: .08em;
+      padding-top: 3px;
+    }
+
+    .sched-event {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(15px, 2.4vw, 22px);
+      line-height: 1.3;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(16px, 4%, 28px);
+      margin-top: clamp(16px, 3%, 24px);
+    }
+
+    .detail-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(10px, 1.3vw, 15px);
+      letter-spacing: .40em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .detail-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.9vw, 20px);
+      line-height: 1.5;
+    }
+
+    .find-us {
+      text-align: center;
+    }
+
+    .find-us .venue {
+      margin-top: 10px;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .card {
+        aspect-ratio: unset;
+        min-height: unset;
+      }
+
+      .date-month {
+        writing-mode: horizontal-tb;
+        transform: none;
+        border: none;
+        border-top: 1px solid currentColor;
+        border-bottom: 1px solid currentColor;
+        padding: 4px 10px;
+        font-size: 13px;
+      }
+    }
+
+    /* ── Print ── */
+    @page { size: 5in 7in; margin: 0; }
+
+    @media print {
+      .hero { display: none !important; }
+      .cards-section {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: none !important;
+        padding-top: 0;
+      }
+      .card {
+        opacity: 1 !important;
+        transform: none !important;
+        break-inside: avoid;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Scene 1: Envelope ── -->
+  <section class="hero">
+    <div
+      class="envelope"
+      id="envelope"
+      role="button"
+      tabindex="0"
+      aria-label="Nhấn để mở thiệp"
+    >
+      <div class="env-flap"></div>
+
+      <div class="stamp">
+        <div class="stamp-inner">
+          <span class="stamp-vows">Vows</span>
+          <span class="stamp-date">30.05.26</span>
+        </div>
+      </div>
+
+      <div class="seal">PN</div>
+
+      <div class="env-addr">
+        <div class="addr-label">to · gửi</div>
+        <div class="addr-guest">người bạn thân thương</div>
+        <div class="addr-lines">
+          Địa chỉ dòng 1<br>
+          Quận / Thành phố
+        </div>
+      </div>
+
+      <div class="env-footer">
+        <div class="addr-label">from · phong &amp; nhung</div>
+        <div class="env-heart">♥ P · N ♥</div>
+      </div>
+    </div>
+
+    <p class="hint" id="hint">Nhấn để mở</p>
+  </section>
+
+  <!-- ── Scene 2 &amp; 3: Cards ── -->
+  <section class="cards-section" id="cards">
+
+    <!-- Thiệp chính -->
+    <div class="card" id="card-invite">
+      <div class="card-inner">
+        <div class="ornament">Together with their families</div>
+
+        <div style="text-align:center;">
+          <div class="eyebrow" style="margin-bottom:clamp(14px,3%,24px);">Trân trọng kính mời</div>
+          <h1 class="names">
+            Hoàng Phong
+            <span class="amp">&amp;</span>
+            Hồng Nhung
+          </h1>
+          <div class="hairline"></div>
+          <p class="invite-copy">
+            cùng chia vui trong ngày<br>
+            <em>lễ thề ước</em> của chúng tôi
+          </p>
+        </div>
+
+        <div class="date-block">
+          <div class="date-row">
+            <div class="date-num">30</div>
+            <div class="date-month">Tháng Năm</div>
+            <div class="date-num">26</div>
+          </div>
+          <div class="dow">Thứ Bảy · 16:00</div>
+        </div>
+
+        <div class="venue">
+          <span class="venue-name">Trốn Glamping</span>
+          <span class="venue-sub">Khu cắm trại giữa rừng</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thiệp lịch trình -->
+    <div class="card" id="card-details">
+      <div class="card-inner">
+        <div>
+          <div class="ornament">Order of the day</div>
+          <div class="section-title">Lịch trình</div>
+
+          <div class="schedule">
+            <div class="sched-time">15:30</div>
+            <div class="sched-event">Đón khách · Welcome</div>
+            <div class="sched-time">16:00</div>
+            <div class="sched-event">Lễ thề ước</div>
+            <div class="sched-time">17:00</div>
+            <div class="sched-event">Cocktail giữa rừng</div>
+            <div class="sched-time">18:30</div>
+            <div class="sched-event">Tiệc tối ấm cúng</div>
+            <div class="sched-time">20:00</div>
+            <div class="sched-event">Lửa trại &amp; khiêu vũ</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="hairline" style="margin-bottom:0;"></div>
+          <div class="details-grid">
+            <div>
+              <div class="detail-eyebrow">Trang phục</div>
+              <div class="detail-value">Garden formal · tông màu đất</div>
+            </div>
+            <div>
+              <div class="detail-eyebrow">Hashtag</div>
+              <div class="detail-value">#PhongNhungVows</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="find-us">
+          <div class="ornament" style="font-size:clamp(10px,1.4vw,15px);">Find us here</div>
+          <div class="venue">
+            <span class="venue-name">Trốn Glamping</span>
+            <span class="venue-sub">Khu cắm trại giữa rừng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const hint     = document.getElementById('hint');
+    const cards    = document.getElementById('cards');
+    let opened = false;
+
+    function openEnvelope() {
+      if (opened) return;
+      opened = true;
+
+      envelope.classList.add('open');
+      hint.classList.add('away');
+      envelope.removeAttribute('role');
+      envelope.removeAttribute('tabindex');
+
+      // Show cards after seal/flap animation completes
+      setTimeout(() => {
+        cards.style.display = 'flex';
+        // Double rAF so the browser paints display:flex before adding visible
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            cards.classList.add('visible');
+            // Scroll into view after first card starts appearing
+            setTimeout(() => {
+              cards.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 120);
+          });
+        });
+      }, 540);
+    }
+
+    envelope.addEventListener('click', openEnvelope);
+    envelope.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+  </script>
+
+</body>
+</html>
