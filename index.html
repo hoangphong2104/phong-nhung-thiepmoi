@@ -19,10 +19,10 @@
 
     /* ── Tokens ── */
     :root {
-      --bg-page:      #dfe9db;
-      --card-bg:      #88a882;
-      --card-fg:      #f0ece2;
-      --accent:       #f0ece2;
+      --bg-page:      #e5dfd5;
+      --card-bg:      #ecf3e8;
+      --card-fg:      #263822;
+      --accent:       #5a7855;
       --seal-light:   #c4a46a;
       --seal-dark:    #9a7840;
       --env-bg:       #85a67f;
@@ -288,31 +288,23 @@
       transform: translateY(0);
     }
 
-    /* Sage green card (invitation) */
+    /* Light sage invitation card */
     .card--green {
-      background: #88a882;
-      color: #f0ece2;
-      --accent: #f0ece2;
+      background: #ecf3e8;
+      color: #263822;
       background-image:
-        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(30,55,28,.12), transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(30,55,28,.10), transparent 70%);
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(90,120,82,.06), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(90,120,82,.04), transparent 70%);
     }
 
-    /* Cream card (details) */
+    /* Light sage details card — same palette, very slightly cooler */
     .card--cream {
-      background: #f0ebe0;
-      color: #2a3d28;
-      --accent: #5a7855;
+      background: #eaf2e5;
+      color: #263822;
       background-image:
-        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(88,120,82,.07), transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(88,120,82,.05), transparent 70%);
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(90,120,82,.06), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(90,120,82,.04), transparent 70%);
     }
-
-    .card--green .amp,
-    .card--green .dow,
-    .card--green .invite-copy em { color: #f0ece2; }
-
-    .card--cream .detail-eyebrow { color: #5a7855; }
 
     .card-inner {
       position: absolute;
@@ -523,7 +515,13 @@
     @media (max-width: 600px) {
       .card {
         aspect-ratio: unset;
-        min-height: unset;
+      }
+
+      /* Fix: absolute inner → relative so card gets real height */
+      .card-inner {
+        position: relative;
+        inset: auto;
+        height: auto;
       }
 
       .date-month {
